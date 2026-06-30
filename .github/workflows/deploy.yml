@@ -28,9 +28,9 @@ jobs:
           npm ci
 
       - name: Build Frontend
-        # Replace the VITE_API_URL value with your live Render backend URL during build
+        # Connected to the live Render backend service
         env:
-          VITE_API_URL: https://waste-management-backend.onrender.com/api
+          VITE_API_URL: https://sustainable-waste-management-amrn.onrender.com/api
         run: |
           cd frontend
           npm run build
