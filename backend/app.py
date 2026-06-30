@@ -28,6 +28,22 @@ from services.mock_data import COLLECTION_CENTERS
 ai_service = AIService()
 db_service = DBService()
 
+@app.route("/", methods=["GET"])
+def home_index():
+    """Default backend landing index."""
+    return jsonify({
+        "message": "Welcome to the Sustainable Waste Management Assistant REST API backend!",
+        "status": "active",
+        "documentation": "https://github.com/lokeshkodamanchili/Sustainable-Waste-Management",
+        "endpoints": [
+            "/api/health",
+            "/api/classify",
+            "/api/history",
+            "/api/statistics",
+            "/api/centers"
+        ]
+    }), 200
+
 @app.route("/api/health", methods=["GET"])
 def health_check():
     """Service health status endpoint."""
