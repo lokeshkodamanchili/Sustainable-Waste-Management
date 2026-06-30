@@ -14,8 +14,8 @@ logging.basicConfig(
 )
 logger = logging.getLogger("backend_app")
 
-# Initialize Flask app
-app = Flask(__name__)
+# Initialize Flask app to serve React static frontend
+app = Flask(__name__, static_folder="static", static_url_path="")
 # Enable CORS for React frontend (localhost:5173) and production deploys
 CORS(app, resources={r"/api/*": {"origins": "*"}})
 
@@ -30,19 +30,8 @@ db_service = DBService()
 
 @app.route("/", methods=["GET"])
 def home_index():
-    """Default backend landing index."""
-    return jsonify({
-        "message": "Welcome to the Sustainable Waste Management Assistant REST API backend!",
-        "status": "active",
-        "documentation": "https://github.com/lokeshkodamanchili/Sustainable-Waste-Management",
-        "endpoints": [
-            "/api/health",
-            "/api/classify",
-            "/api/history",
-            "/api/statistics",
-            "/api/centers"
-        ]
-    }), 200
+    """Serve the React frontend application."""
+    return app.send_static_file("index.html")
 
 @app.route("/api/health", methods=["GET"])
 def health_check():
